@@ -34,6 +34,20 @@ Everything is chosen in the menu; there is no config file.
 The choices are saved in `~/Library/Application Support/costmeter/settings.json` (in
 `costmeter-fake` with `--fake`). Deleting that file brings back the defaults.
 
+## Design ideas (not built)
+
+Two more designs from the original mockups, with sample numbers. Neither is in the app yet.
+
+**Rich popover.** A SwiftUI-style window with a daily-spend chart and per-service bars, as an
+alternative to the native menu.
+
+![Popover mockup](docs/images/popover-mockup.png)
+
+**Budget alert.** The notification planned for Phase 5 (alerts and notifications), which is
+deferred.
+
+![Budget alert mockup](docs/images/alert-mockup.png)
+
 ## Make targets
 
 | Target | What it does |
