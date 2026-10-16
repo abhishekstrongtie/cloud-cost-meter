@@ -7,6 +7,11 @@ narrowed to one resource group, chosen from the menu.
 It signs in through your existing `az login` session, stores no secrets, and only calls read-only
 cost endpoints. Providers sit behind a cloud-neutral interface so AWS can be added later.
 
+![CostMeter menu mockup](docs/images/menu-mockup.png)
+
+*Design mockup with sample numbers. The built menu also has **Scope**, **Settings** and
+**About CostMeter** items, and no keyboard shortcuts.*
+
 Status: built phase by phase from `thoughts/shared/plans/2026-10-15-costmeter.md`. The Azure
 provider, the cache and scheduler, the menu bar UI with its scope picker and settings, and the
 installable `.app` are in place; notifications come later.
