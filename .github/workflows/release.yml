@@ -1,0 +1,79 @@
+# On every push to main: run the checks. If VERSION in the Makefile has no release yet, also build
+# CostMeter-<version>.dmg and publish it as a GitHub Release tagged v<version>.
+#
+# To ship a release: raise VERSION in the Makefile, commit, and push to main.
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["**.md", "docs/**"] # documentation-only pushes need no build
+
+concurrency:
+  group: release
+  cancel-in-progress: false # never cancel a half-published release
+
+permissions:
+  contents: write # needed to create the release and upload the DMG
+
+jobs:
+  release:
+    runs-on: macos-latest # Apple silicon, so the DMG runs on Apple silicon Macs only
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: Check
+        run: make vet fmt-check test
+
+      - name: Is this version already released?
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="$(sed -n 's/^VERSION[[:space:]]*?=[[:space:]]*\([0-9][^[:space:]]*\).*/\1/p' Makefile)"
+          if [ -z "$VERSION" ]; then echo "could not read VERSION from the Makefile" >&2; exit 1; fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "v$VERSION is already released; nothing to publish."
+            echo "new=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "v$VERSION is new; it will be published."
+            echo "new=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build the DMG
+        if: steps.version.outputs.new == 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          make dmg VERSION="$VERSION" BUILD="$RUN_NUMBER"
+          cd build && shasum -a 256 "CostMeter-$VERSION.dmg" > "CostMeter-$VERSION.dmg.sha256"
+
+      - name: Publish the release
+        if: steps.version.outputs.new == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          cat > notes.md <<'EOF'
+          macOS menu bar app for Azure cost. **Apple silicon Macs only.**
+
+          Install: open the DMG, drag **CostMeter** to **Applications**, then remove the download
+          block (the app is ad-hoc signed, not notarized):
+
+              xattr -dr com.apple.quarantine /Applications/CostMeter.app
+
+          You also need the Azure CLI signed in (`az login`) with Cost Management Reader access.
+          See [docs/INSTALL.md](https://github.com/${{ github.repository }}/blob/${{ github.sha }}/docs/INSTALL.md).
+          EOF
+          gh release create "v$VERSION" \
+            "build/CostMeter-$VERSION.dmg" \
+            "build/CostMeter-$VERSION.dmg.sha256" \
+            --target "$GITHUB_SHA" \
+            --title "CostMeter $VERSION" \
+            --notes-file notes.md

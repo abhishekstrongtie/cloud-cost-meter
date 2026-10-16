@@ -21,6 +21,11 @@ installable `.app` are in place; notifications come later.
 `make install` builds the app, copies it to `~/Applications`, starts it and registers it to start
 at login. See [docs/INSTALL.md](docs/INSTALL.md) for the prerequisites and troubleshooting.
 
+A built, ad-hoc signed DMG (Apple silicon only) is attached to each
+[release](../../releases). Every push to `main` runs the checks; when `VERSION` in the Makefile
+has no release yet, GitHub Actions builds the DMG and publishes it. See
+[.github/workflows/release.yml](.github/workflows/release.yml).
+
 ## Settings
 
 Everything is chosen in the menu; there is no config file.
