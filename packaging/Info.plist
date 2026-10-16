@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>local.costmeter</string>
+	<key>CFBundleName</key>
+	<string>CostMeter</string>
+	<key>CFBundleDisplayName</key>
+	<string>CostMeter</string>
+	<key>CFBundleExecutable</key>
+	<string>costmeter</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleShortVersionString</key>
+	<string>{{VERSION}}</string>
+	<key>CFBundleVersion</key>
+	<string>{{BUILD}}</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0</string>
+	<!-- A menu bar app: no Dock icon and no app menu. -->
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>Internal tool. Reads Azure cost data; changes nothing.</string>
+</dict>
+</plist>

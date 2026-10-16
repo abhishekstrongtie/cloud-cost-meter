@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "nextLink": null,
+    "columns": [
+      {"name": "Cost", "type": "Number"},
+      {"name": "UsageDate", "type": "Number"},
+      {"name": "CostStatus", "type": "String"},
+      {"name": "Currency", "type": "String"}
+    ],
+    "rows": [
+      [24.0, 20261005, "Actual", "USD"],
+      [70.0, 20261006, "Forecast", "USD"],
+      [70.0, 20261007, "Forecast", "USD"],
+      [75.5, 20261008, "Forecast", "USD"]
+    ]
+  }
+}

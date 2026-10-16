@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "nextLink": null,
+    "columns": [
+      {"name": "Cost", "type": "Number"},
+      {"name": "ResourceGroupName", "type": "String"},
+      {"name": "Currency", "type": "String"}
+    ],
+    "rows": [
+      [200.4, "rg-data", "USD"],
+      [600.0, "rg-web", "USD"],
+      [152.0, "rg-shared", "USD"],
+      [150.0, "rg-data", "USD"],
+      [12.5, "", "USD"]
+    ]
+  }
+}

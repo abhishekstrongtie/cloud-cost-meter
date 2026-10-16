@@ -1,0 +1,13 @@
+{
+  "properties": {
+    "nextLink": null,
+    "columns": [
+      {"name": "Cost", "type": "Number"},
+      {"name": "ServiceName", "type": "String"},
+      {"name": "Currency", "type": "String"}
+    ],
+    "rows": [
+      [3.0, "Key Vault", "USD"]
+    ]
+  }
+}

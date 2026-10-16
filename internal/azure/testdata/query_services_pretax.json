@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "nextLink": null,
+    "columns": [
+      {"name": "Currency", "type": "String"},
+      {"name": "PreTaxCost", "type": "Number"},
+      {"name": "ServiceName", "type": "String"}
+    ],
+    "rows": [
+      ["USD", 12.5, "Storage"],
+      ["USD", 7.5, "Key Vault"]
+    ]
+  }
+}

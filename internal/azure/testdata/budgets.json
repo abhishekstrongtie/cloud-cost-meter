@@ -1,0 +1,21 @@
+{
+  "value": [
+    {
+      "name": "annual-all",
+      "properties": {"timeGrain": "Annually", "amount": 50000, "currentSpend": {"amount": 9000, "unit": "USD"}}
+    },
+    {
+      "name": "monthly-small",
+      "properties": {"timeGrain": "Monthly", "amount": 400, "currentSpend": {"amount": 330.5, "unit": "USD"}}
+    },
+    {
+      "name": "quarterly-huge",
+      "properties": {"timeGrain": "Quarterly", "amount": 99999, "currentSpend": {"amount": 1, "unit": "USD"}}
+    },
+    {
+      "name": "monthly-big",
+      "properties": {"timeGrain": "Monthly", "amount": 2000, "currentSpend": {"amount": 412.75, "unit": "USD"}}
+    }
+  ],
+  "nextLink": null
+}

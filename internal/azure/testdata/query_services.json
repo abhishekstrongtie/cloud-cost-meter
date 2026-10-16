@@ -1,0 +1,21 @@
+{
+  "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/query/fixture",
+  "name": "fixture",
+  "type": "Microsoft.CostManagement/query",
+  "location": null,
+  "sku": null,
+  "eTag": null,
+  "properties": {
+    "nextLink": null,
+    "columns": [
+      {"name": "Cost", "type": "Number"},
+      {"name": "ServiceName", "type": "String"},
+      {"name": "Currency", "type": "String"}
+    ],
+    "rows": [
+      [52.0, "Storage", "USD"],
+      [275.5, "Virtual Machines", "USD"],
+      [3.0, "Key Vault", "USD"]
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "properties": {
+    "nextLink": null,
+    "columns": [
+      {"name": "Cost", "type": "Number"},
+      {"name": "Currency", "type": "String"}
+    ],
+    "rows": [
+      [1000.0, "USD"]
+    ]
+  }
+}

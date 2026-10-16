@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>{{LABEL}}</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>{{APP}}/Contents/MacOS/costmeter</string>
+	</array>
+	<!-- Start when you log in. -->
+	<key>RunAtLoad</key>
+	<true/>
+	<!-- Restart after a crash, but not after "Quit CostMeter" (a clean exit). -->
+	<key>KeepAlive</key>
+	<dict>
+		<key>SuccessfulExit</key>
+		<false/>
+	</dict>
+	<!-- Only in a desktop session; it has a menu bar item. -->
+	<key>LimitLoadToSessionType</key>
+	<string>Aqua</string>
+	<key>ProcessType</key>
+	<string>Interactive</string>
+	<!-- launchd gives programs a minimal PATH; the app needs to find `az` (Homebrew). -->
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>PATH</key>
+		<string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+	</dict>
+	<key>StandardOutPath</key>
+	<string>{{HOME}}/Library/Logs/costmeter.log</string>
+	<key>StandardErrorPath</key>
+	<string>{{HOME}}/Library/Logs/costmeter.log</string>
+</dict>
+</plist>

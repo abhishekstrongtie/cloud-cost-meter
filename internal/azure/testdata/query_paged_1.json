@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Query?api-version=2023-11-01&$skiptoken=page2",
+    "columns": [
+      {"name": "Cost", "type": "Number"},
+      {"name": "ServiceName", "type": "String"},
+      {"name": "Currency", "type": "String"}
+    ],
+    "rows": [
+      [275.5, "Virtual Machines", "USD"],
+      [52.0, "Storage", "USD"]
+    ]
+  }
+}
