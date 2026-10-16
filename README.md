@@ -4,8 +4,10 @@ A macOS menu bar app that shows month-to-date Azure spend for your subscriptions
 service, Azure's own forecast and your Azure Budgets. Each subscription can be tracked whole or
 narrowed to one resource group, chosen from the menu.
 
-It signs in through your existing `az login` session, stores no secrets, and only calls read-only
-cost endpoints. Providers sit behind a cloud-neutral interface so AWS can be added later.
+It works with any Azure subscription you can read costs for (the **Cost Management Reader** role is
+enough). It signs in through your existing `az login` session, stores no secrets, and only calls
+read-only cost endpoints on Azure's management API; it sends nothing anywhere else. Providers sit
+behind a cloud-neutral interface so AWS can be added later.
 
 ![CostMeter menu mockup](docs/images/menu-mockup.png)
 

@@ -1,7 +1,7 @@
 # Checking the Azure endpoints by hand
 
 CostMeter makes six read-only calls per tracked scope. These are the same calls as `az rest`
-commands, so you can confirm on the office Mac that your login can make them, and capture real
+commands, so you can confirm on your Mac that your login can make them, and capture real
 responses to test the parser against.
 
 All dates are **UTC**, because that is what Azure's cost data uses. Compare any total with the

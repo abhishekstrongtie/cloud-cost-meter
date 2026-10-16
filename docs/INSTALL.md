@@ -1,8 +1,9 @@
-# Installing CostMeter on the office Mac
+# Installing CostMeter
 
-CostMeter only reads cost data (it never creates or changes anything in Azure) and keeps no
-secrets: it uses your own `az login` session. Self-built apps and developer tools may need
-approval, so check your company's policy before installing.
+CostMeter works with any Azure subscription your login can read costs for. It only reads cost
+data (it never creates or changes anything in Azure) and keeps no secrets: it uses your own
+`az login` session. If your Mac is managed by an employer, check its policy on developer tools and
+self-built apps before installing.
 
 ## What you need
 
