@@ -5,7 +5,33 @@ data (it never creates or changes anything in Azure) and keeps no secrets: it us
 `az login` session. If your Mac is managed by an employer, check its policy on developer tools and
 self-built apps before installing.
 
-## What you need
+There are two ways to install it: download the ready-made app (no Go needed), or build it from
+source. Either way you need macOS 13 or newer on an Apple silicon Mac (M1 or newer). Intel Macs are not
+supported.
+
+## Option A: download the app
+
+1. Install the Azure CLI and sign in:
+   ```bash
+   brew install azure-cli
+   az login
+   ```
+2. Download `CostMeter-<version>.dmg` from the [latest release](../../../releases/latest).
+3. Open the DMG and drag **CostMeter** onto **Applications**.
+4. The app is ad-hoc signed, not notarized by Apple, so macOS blocks a downloaded copy as coming
+   from an unidentified developer. Remove that block once:
+   ```bash
+   xattr -dr com.apple.quarantine /Applications/CostMeter.app
+   ```
+5. Open **CostMeter** from Applications. A cloud with this month's spend appears at the right of the
+   menu bar. To start it at login, add it under **System Settings › General › Login Items**.
+
+Each release also has a `.sha256` file. To check your download:
+`shasum -a 256 CostMeter-<version>.dmg` should print the same value.
+
+## Option B: build from source
+
+This also sets up the login agent, which restarts the app after a crash.
 
 | Tool | Why | How to get it |
 |---|---|---|
@@ -13,19 +39,14 @@ self-built apps before installing.
 | Go 1.27 or newer | to build the app | `brew install go` |
 | Azure CLI | CostMeter signs in through it | `brew install azure-cli`, then `az login` |
 
-## 1. Get the source onto the Mac
-
-There is no git remote. On the Mac where the code lives:
+### 1. Get the source
 
 ```bash
-cd ~/Desktop/Projects
-zip -r costmeter.zip costmeter -x 'costmeter/build/*'
+git clone https://github.com/abhishekstrongtie/cloud-cost-meter.git
+cd cloud-cost-meter
 ```
 
-Copy `costmeter.zip` over (scp, a shared drive, AirDrop) and unzip it. Alternatively build the app
-on the first Mac and copy only the finished app (see "Copying a built app" below).
-
-## 2. Check that your login can read the costs
+### 2. Check that your login can read the costs
 
 Sign in, then run the commands in [azure-endpoints.md](azure-endpoints.md). If they return data,
 the app will work. Save the responses as that guide describes if you want the tests to check
@@ -33,11 +54,10 @@ Azure's real column names.
 
 ```bash
 az login
-cd costmeter
 make test            # all tests must pass before installing
 ```
 
-## 3. Install
+### 3. Install
 
 ```bash
 make install
@@ -51,7 +71,7 @@ it and starts the new one.
 To update after changing the code, raise `BUILD` in the [Makefile](../Makefile) and run
 `make install` again.
 
-## 4. Use it
+## Use it
 
 Click the cloud. **Scope** chooses subscriptions and resource groups; **Settings** sets how often
 it refreshes and how many services are listed. Everything you choose is saved automatically.
@@ -69,18 +89,14 @@ the log stay in `~/Library`; delete them too for a complete removal:
 rm -rf ~/Library/Application\ Support/costmeter ~/Library/Caches/costmeter ~/Library/Logs/costmeter.log
 ```
 
-## Copying a built app instead of building
+## Giving the app to another Mac
 
 ```bash
-make app
-ditto -c -k --keepParent build/CostMeter.app CostMeter.zip
+make dmg      # builds build/CostMeter-<version>.dmg
 ```
 
-On the other Mac, unzip it and drag `CostMeter.app` to `~/Applications`. If macOS says it is from
-an unidentified developer, run `xattr -dr com.apple.quarantine ~/Applications/CostMeter.app`. A
-built app only runs on the same kind of Mac (Apple silicon or Intel) it was built on. Add it to
-**System Settings › General › Login Items** to start it at login (this route does not set up the
-automatic restart after a crash that `make install` does).
+Send the DMG; the other Mac follows Option A from step 3. It only runs on Apple silicon Macs.
+`make app` alone builds just `build/CostMeter.app`.
 
 ## Where things are
 

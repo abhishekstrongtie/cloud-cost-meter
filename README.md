@@ -14,16 +14,15 @@ behind a cloud-neutral interface so AWS can be added later.
 *Design mockup with sample numbers. The built menu also has **Scope**, **Settings** and
 **About CostMeter** items, and no keyboard shortcuts.*
 
-Status: built phase by phase from `thoughts/shared/plans/2026-10-15-costmeter.md`. The Azure
-provider, the cache and scheduler, the menu bar UI with its scope picker and settings, and the
-installable `.app` are in place; notifications come later.
+Status: the Azure provider, the cache and scheduler, the menu bar UI with its scope picker and
+settings, and the installable `.app` are in place. Budget alerts and notifications come later.
 
 ## Install
 
 `make install` builds the app, copies it to `~/Applications`, starts it and registers it to start
 at login. See [docs/INSTALL.md](docs/INSTALL.md) for the prerequisites and troubleshooting.
 
-A built, ad-hoc signed DMG (Apple silicon only) is attached to each
+A built, ad-hoc signed DMG (Apple silicon Macs only; Intel Macs are not supported) is attached to each
 [release](../../releases). Every push to `main` runs the checks; when `VERSION` in the Makefile
 has no release yet, GitHub Actions builds the DMG and publishes it. See
 [.github/workflows/release.yml](.github/workflows/release.yml).
@@ -65,6 +64,7 @@ deferred.
 | `make fmt-check` | fails if any file needs `gofmt` |
 | `make run-fake` | runs the app with built-in sample data and separate state files |
 | `make app` | builds `build/CostMeter.app` (with its icon, ad-hoc signed) |
+| `make dmg` | builds `build/CostMeter-<version>.dmg` for sending to another Mac |
 | `make install` | builds, installs to `~/Applications` and starts it, also at every login (safe to repeat) |
 | `make uninstall` | stops it and removes the app and its login agent (your settings and log are kept) |
 | `make clean` | deletes `build/` |

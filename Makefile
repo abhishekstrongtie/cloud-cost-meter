@@ -1,6 +1,6 @@
 .PHONY: build test vet fmt-check run-fake app dmg install uninstall clean
 
-# Release numbers for the app (there is no git to derive them from). Raise BUILD for every
+# Release numbers for the app (not derived from git). Raise BUILD for every
 # installable change; raise VERSION for a release.
 VERSION ?= 0.1.0
 BUILD   ?= 1
@@ -28,7 +28,7 @@ run-fake:
 	go run ./cmd/costmeter --fake
 
 # app builds build/CostMeter.app: the binary, Info.plist, the icon, and an ad-hoc signature
-# (no Apple developer account needed; it only has to be valid on the Mac that built it).
+# (no Apple developer account needed). Only Apple silicon Macs are supported.
 app:
 	rm -rf $(APP)
 	mkdir -p $(APP)/Contents/MacOS $(APP)/Contents/Resources

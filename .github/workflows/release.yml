@@ -61,7 +61,7 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           cat > notes.md <<'EOF'
-          macOS menu bar app for Azure cost. **Apple silicon Macs only.**
+          macOS menu bar app for Azure cost. **Apple silicon Macs only** (macOS 13 or newer).
 
           Install: open the DMG, drag **CostMeter** to **Applications**, then remove the download
           block (the app is ad-hoc signed, not notarized):
